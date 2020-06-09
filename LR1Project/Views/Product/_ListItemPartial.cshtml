@@ -1,0 +1,24 @@
+﻿@model Flower
+
+<div class='card m-2 p-1 col-4'>
+    <img src="~/Images/Flowers/@Model.FlowerImage"
+         alt='NoImage'
+         class="card-img" />
+    <div class="card-body">
+        <h5 class="card-title">
+            @Model.FlowerName
+        </h5>
+        <p class="card-text">
+            @Model.FlowerDescription
+        </p>
+        <div class="card-subtitle badge">
+            <h4> @Model.FlowerPrice руб.</h4>
+        </div>
+        <!--Разметка кнопки добавления в корзину-->
+        <a asp-action="Add"
+           asp-controller="Cart" asp-route-id="@Model.FlowerId" asp-route-returnUrl="@ViewContext.HttpContext.Request.Path"
+           class="btn btn-primary">
+            <i class="fa fa-shopping-cart"></i> В корзину
+        </a>
+    </div>
+</div>
