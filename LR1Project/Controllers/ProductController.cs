@@ -21,19 +21,19 @@ namespace LR1Project.Controllers
         }
         public IActionResult Index(int? group, int pageNo = 1)
         {
-            var flowersFiltered = _flowers
-            .Where(d => !group.HasValue || d.FlowerGroupId == group.Value);
+            var items = _flowers
+            .Skip((pageNo - 1) * _pageSize)
+            .Take(_pageSize)
+            .ToList();
+
             ViewData["Groups"] = _flowerGroups;
+            // Получить id текущей группы и поместить в TempData
             var currentGroup = group.HasValue
             ? group.Value
             : 0;
-            ViewData["CurrentGroup"] = currentGroup;
 
-            var items = _flowers
-             .Skip((pageNo - 1) * _pageSize)
-             .Take(_pageSize)
-             .ToList();
-            return View(ListViewModel<Flower>.GetModel(flowersFiltered, pageNo, _pageSize));
+            ViewData["CurrentGroup"] = currentGroup;
+            return View(ListViewModel<Flower>.GetModel(_flowers, pageNo, _pageSize));
         }
 
         /// <summary>
