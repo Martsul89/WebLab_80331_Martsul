@@ -17,7 +17,7 @@ namespace LR1Project.Tests
             var controller = new ProductController();
             controller._flowers = GetFlowersList();
             // Act
-            var result = controller.Index(page) as ViewResult;
+            var result = controller.Index(pageNo: page, group: null) as ViewResult;
             var model = result?.Model as List<Flower>;
             // Assert
             Assert.NotNull(model);
@@ -43,11 +43,11 @@ namespace LR1Project.Tests
         {
             return new List<Flower>
             {
-            new Flower{ FlowerId=1},
-            new Flower{ FlowerId=2},
-            new Flower{ FlowerId=3},
-            new Flower{ FlowerId=4},
-            new Flower{ FlowerId=5}
+            new Flower{ FlowerId=1, FlowerGroupId=1},
+            new Flower{ FlowerId=2, FlowerGroupId=1},
+            new Flower{ FlowerId=3, FlowerGroupId=2},
+            new Flower{ FlowerId=4, FlowerGroupId=2},
+            new Flower{ FlowerId=5, FlowerGroupId=3}
             };
         }
 
@@ -77,6 +77,23 @@ namespace LR1Project.Tests
             var model = ListViewModel<Flower>.GetModel(GetFlowersList(), page, 3);
             // Assert
             Assert.Equal(id, model[0].FlowerId);
+        }
+        [Theory]
+        [MemberData(memberName: nameof(Data))]
+        public void ControllerSelectsGroup()
+        {
+            // arrange
+            var controller = new ProductController();
+            controller._flowers = GetFlowersList();
+            // act
+            var result = controller.Index(2) as ViewResult;
+            var model = result.Model as List<Flower>;
+            // assert
+            Assert.Equal(2, model.Count);
+            Assert.Equal(GetFlowersList()[1], model[2], Comparer<Flower>.GetComparer((d1, d2) => 
+            {
+                return d1.FlowerId == d2.FlowerId;
+            }));
         }
     }
 

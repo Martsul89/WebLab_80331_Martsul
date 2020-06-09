@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WebLab.DAL.Entities;
 using LR1Project.Models;
+using LR1Project.Extensions;
 
 namespace LR1Project.Controllers
 {
@@ -19,21 +20,24 @@ namespace LR1Project.Controllers
             _pageSize = 3;
             SetupData();
         }
+        [Route("Catalog")]
+        [Route("Catalog/Page_{pageNo}")]
         public IActionResult Index(int? group, int pageNo = 1)
         {
-            var items = _flowers
-            .Skip((pageNo - 1) * _pageSize)
-            .Take(_pageSize)
-            .ToList();
-
+            var flowersFiltered = _flowers
+            .Where(d => !group.HasValue || d.FlowerGroupId == group.Value);
+            // Поместить список групп во ViewData
             ViewData["Groups"] = _flowerGroups;
             // Получить id текущей группы и поместить в TempData
             var currentGroup = group.HasValue
             ? group.Value
             : 0;
-
             ViewData["CurrentGroup"] = currentGroup;
-            return View(ListViewModel<Flower>.GetModel(_flowers, pageNo, _pageSize));
+            //if (Request.Headers["x-requested-with"] == "XMLHttpRequest")
+            if (Request.IsAjaxRequest())
+                return PartialView("_ListPartial", ListViewModel<Flower>.GetModel(flowersFiltered, pageNo, _pageSize));
+            return View(ListViewModel<Flower>.GetModel(flowersFiltered,
+            pageNo, _pageSize));
         }
 
         /// <summary>
