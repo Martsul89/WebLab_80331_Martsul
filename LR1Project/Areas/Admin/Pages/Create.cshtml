@@ -1,0 +1,65 @@
+﻿@page
+@model LR1Project.Areas.Admin.Pages.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+@section Scripts{
+    <script src="~/Scripts/bs-custom-file-input.js"></script>
+    <script>
+        bsCustomFileInput.init();
+    </script> }
+
+<h1>Create</h1>
+
+<h4>Flower</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Flower.FlowerName" class="control-label"></label>
+                <input asp-for="Flower.FlowerName" class="form-control" />
+                <span asp-validation-for="Flower.FlowerName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Flower.FlowerDescription" class="control-label"></label>
+                <input asp-for="Flower.FlowerDescription" class="form-control" />
+                <span asp-validation-for="Flower.FlowerDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Flower.FlowerPrice" class="control-label"></label>
+                <input asp-for="Flower.FlowerPrice" class="form-control" />
+                <span asp-validation-for="Flower.FlowerPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Flower.FlowerImage" class="control-label"></label>
+                <div class="custom-file mt-3">
+                    <input type="image" class="custom-file-input" id="customFile">
+                    <label class="custom-file-label" for="customFile">Выберите файл</label>
+                </div>
+            </div>
+
+            <!--
+                 <div class="form-group">
+                <label asp-for="Flower.FlowerImage" class="control-label"></label>
+                <input asp-for="Flower.FlowerImage" class="form-control" />
+                <span asp-validation-for="Flower.FlowerImage" class="text-danger"></span>
+            </div>
+                 -->
+            <div class="form-group">
+                <label asp-for="Flower.FlowerGroupId" class="control-label"></label>
+                <select asp-for="Flower.FlowerGroupId" class="form-control" asp-items="ViewBag.FlowerGroupId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+

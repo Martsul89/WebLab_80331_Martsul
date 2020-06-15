@@ -38,7 +38,8 @@ namespace LR1Project
         {
         new MenuItem{ Controller="Home", Action="Index", Text="ЛР3"},
         new MenuItem{ Controller="Product", Action="Index", Text="Каталог"},
-        new MenuItem{ IsPage=true, Area="Admin", Page="/Index", Text="Администрирование"}
+        new MenuItem{ IsPage=true, Area="Admin", Page="/Index", Text="Администрирование"},
+        new MenuItem{ IsPage=true, Area="ApiDemo", Page="/Index", Text="API-demo"}
         };
 
 

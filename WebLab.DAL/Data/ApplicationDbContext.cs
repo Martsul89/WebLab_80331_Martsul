@@ -10,6 +10,7 @@ namespace WebLab.DAL.Data
         : base(options)
         {
         }
-
+        public DbSet<Flower> Flowers { get; set; }
+        public DbSet<FlowerGroup> FlowerGroups { get; set; }
     }
 }

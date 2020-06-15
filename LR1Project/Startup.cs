@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,6 +13,9 @@ using WebLab.DAL.Entities;
 using WebLab.DAL.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using LR1Project.Models;
+using WebLabsV05.Services;
+using LR1Project.Extensions;
 
 namespace LR1Project
 {
@@ -50,7 +53,22 @@ namespace LR1Project
             .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
-            
+
+            services.AddDistributedMemoryCache();
+            services.AddSession(opt =>
+            {
+                opt.Cookie.HttpOnly = true;
+                opt.Cookie.IsEssential = true;
+            });
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<Cart>(sp => CartService.GetCart(sp));
+
+            services.AddDbContext<ÀpplicationDbContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("ÀpplicationDbContext")));
+
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -66,12 +84,13 @@ namespace LR1Project
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
-
+            app.UseLogging();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
-
+            
             app.UseAuthentication();
+            app.UseSession();
 
             app.UseMvc(routes => {routes.MapRoute(name: "default", template: "{controller=Home}/{action=Index}/{id?}");});
 

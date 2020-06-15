@@ -1,0 +1,69 @@
+﻿@page
+@model LR1Project.Areas.Admin.Pages.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create" class="btn btn-outline-info">
+        <span class="fa fa-plus-circle">Добавить</span>
+    </a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.Flower[0].FlowerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Flower[0].FlowerDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Flower[0].FlowerPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Flower[0].Group)
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Flower) {
+        <tr>
+            <td>
+                <img src="~/Images/Flowers/@item.FlowerImage" alt="NoImage" width="50" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FlowerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FlowerDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FlowerPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Group.GroupName)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.FlowerId"
+                   class="btn btn-outline-info">
+                    <span class="fa fa-pencil"></span>
+                </a>
+            </td>
+            <td>
+                <a asp-page="./Delete" asp-route-id="@item.FlowerId"
+                        class="btn btn-outline-danger">
+                    <span class="fa fa-eraser"></span>
+                </a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

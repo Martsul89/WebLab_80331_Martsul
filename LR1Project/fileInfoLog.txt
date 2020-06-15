@@ -1,0 +1,43 @@
+info: group=all groups, page=1
+info: group=all groups, page=2
+info: group=all groups, page=3
+info: group=all groups, page=4
+info: group=Амариллисовые, page=1
+info: group=Ирисовые, page=1
+13.06.2020-12:01:31: url: / returns 200
+13.06.2020-12:01:34: url: /Catalog returns 200
+13.06.2020-12:01:36: url: /Catalog/Page_2 returns 200
+13.06.2020-12:01:37: url: /Catalog/Page_3 returns 200
+13.06.2020-12:01:38: url: /Catalog/Page_4 returns 200
+13.06.2020-12:01:38: url: /Images/Flowers/ returns 404
+13.06.2020-12:33:31: url: /Flower?group=3 returns 404
+13.06.2020-12:33:35: url: /Flowers?group=3 returns 404
+13.06.2020-12:41:36: url: /Flower?group=3. returns 404
+13.06.2020-12:41:43: url: /Flower?group=3 returns 404
+13.06.2020-12:41:48: url: /Flower returns 404
+13.06.2020-12:41:51: url: /Flowers returns 404
+13.06.2020-12:42:02: url: /Flowers?group=3. returns 404
+15.06.2020-8:33:44: url: /Flowers?group=3. returns 404
+15.06.2020-8:33:44: url: /Flowers?group=3 returns 404
+15.06.2020-8:33:45: url: /favicon.ico returns 304
+15.06.2020-8:33:45: url: /lib/twitter-bootstrap/css/bootstrap.css returns 304
+15.06.2020-8:33:45: url: /lib/font-awesome/css/fontawesome.css returns 304
+15.06.2020-8:33:45: url: /css/site.css returns 304
+15.06.2020-8:33:45: url: /lib/jquery/dist/jquery.min.js returns 304
+15.06.2020-8:33:45: url: /js/site.js?v=z33AMMWNgrUhgiR0J0B6EgBrxtCDv3SB2B8Qfsh1Yn8 returns 304
+15.06.2020-8:33:45: url: /lib/bootstrap/dist/js/bootstrap.bundle.min.js returns 304
+15.06.2020-8:33:47: url: /Flowers?group=3. returns 404
+15.06.2020-8:33:47: url: /Flowers?group=3 returns 404
+User logged in.
+15.06.2020-8:42:00: url: /Identity/Account/Login returns 302
+15.06.2020-9:18:59: url: /Images/Flowers/Tulipa.jpg returns 304
+15.06.2020-9:18:59: url: /Images/Flowers/amaryllis.jpg returns 304
+15.06.2020-9:18:59: url: /Images/Flowers/Paeonia.jpg returns 304
+15.06.2020-9:18:59: url: /Images/Flowers/narcissus.jpg returns 304
+15.06.2020-9:18:59: url: /Images/Flowers/Chrysanthemum.jpg returns 304
+15.06.2020-9:18:59: url: /Images/Flowers/ returns 404
+15.06.2020-9:18:59: url: /Images/Flowers/Cymbidium.jpg returns 304
+15.06.2020-9:18:59: url: /Images/Flowers/anemone.jpg returns 304
+15.06.2020-9:18:59: url: /Images/Flowers/Crocus.jpg returns 304
+15.06.2020-9:18:59: url: /Images/Flowers/Lavandula.jpg returns 304
+15.06.2020-9:27:36: url: /Images/Flowers/ returns 404
